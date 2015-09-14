@@ -24,6 +24,10 @@
                 throw 'No contentView provided.';
             }
 
+            _.defaults(this, options, {
+                noHtml5Validate: true
+            });            
+
             this.contentView = options.contentView;
             _.extend(this, _.pick(this.contentView, 'model', 'collection'));
 
@@ -39,7 +43,8 @@
         events: {
             'blur input': 'validateInput',
             'change input[type="radio"], input[type="checkbox"]': 'validateInput',
-            'click submit, button[data-role="submit"]': 'validateSubmit'
+            'click submit, button[data-role="submit"]': 'validateSubmit',
+            'submit': 'validateSubmit'
         },
 
         validateInput: function (evt) {
@@ -54,7 +59,9 @@
             }
         },
 
-        validateSubmit: function () {
+        validateSubmit: function (e) {
+            e.preventDefault();
+
             _.each(this.getContentViews(), this.validateFullForm, this);
         },
 
@@ -132,6 +139,10 @@
         },
 
         onRender: function () {
+            if (this.noHtml5Validate) {
+                this.$el.attr('novalidate', 'true');
+            }
+
             this.$el.append(this.contentView.render().el);
 
             this.bindValidationToViews();
