@@ -57,6 +57,25 @@ define(function (require) {
 
         });
 
+        describe('when passed the "noValidate" option', function () {
+            beforeEach(function () {
+                this.view = new this.ItemViewNoIndex({
+                    model: new this.Model()
+                });
+
+                this.formWrapper = new FormWrapper({
+                    contentView: this.view,
+                    noValidate: true
+                });
+
+                this.formWrapper.render();
+            });
+
+            it('should add the "novalidate" attribute to the form', function () {
+                expect(this.formWrapper.$el.attr('novalidate')).not.toBeUndefined();
+            });
+        });
+
         describe('when there is a contentView without model or collection', function () {
 
             it('should throw an error', function () {

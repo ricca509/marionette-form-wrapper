@@ -132,7 +132,9 @@
         },
 
         onRender: function () {
-            this.$el.append(this.contentView.render().el);
+            this.$el
+                .attr('novalidate', '')
+                .append(this.contentView.render().el);            
 
             this.bindValidationToViews();
 
