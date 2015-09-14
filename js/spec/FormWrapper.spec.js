@@ -257,6 +257,36 @@ define(function (require) {
                 });
             });
 
+            describe('when submitting', function () {
+                describe('and the form fields are valid', function () {
+                    beforeEach(function () {
+                        this.view.$('input[name="field1"]').val('test');
+                        this.view.$('input[name="field2"]').val('test');
+
+                        this.view.$el.trigger('submit');
+                    });
+
+                    it('should not fail validation', function () {
+                        expect(Backbone.Validation.callbacks.valid.calls.count()).toEqual(2);
+                        expect(Backbone.Validation.callbacks.invalid).not.toHaveBeenCalled();
+                    });
+                });
+
+                describe('and the form fields are not valid', function () {
+                    beforeEach(function () {
+                        this.view.$('input[name="field1"]').val('');
+                        this.view.$('input[name="field2"]').val('');
+
+                        this.view.$el.trigger('submit');
+                    });
+
+                    it('should fail validation', function () {
+                        expect(Backbone.Validation.callbacks.valid).not.toHaveBeenCalled();
+                        expect(Backbone.Validation.callbacks.invalid.calls.count()).toEqual(2);
+                    });
+                });
+            });
+
             describe('when clicking on the submit button', function () {
                 describe('and the form fields are valid', function () {
                     beforeEach(function () {

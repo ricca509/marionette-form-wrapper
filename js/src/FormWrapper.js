@@ -39,7 +39,8 @@
         events: {
             'blur input': 'validateInput',
             'change input[type="radio"], input[type="checkbox"]': 'validateInput',
-            'click submit, button[data-role="submit"]': 'validateSubmit'
+            'click submit, button[data-role="submit"]': 'validateSubmit',
+            'submit': 'validateSubmit'
         },
 
         validateInput: function (evt) {
@@ -54,7 +55,9 @@
             }
         },
 
-        validateSubmit: function () {
+        validateSubmit: function (e) {
+            e.preventDefault();
+            
             _.each(this.getContentViews(), this.validateFullForm, this);
         },
 
@@ -134,7 +137,7 @@
         onRender: function () {
             this.$el
                 .attr('novalidate', '')
-                .append(this.contentView.render().el);            
+                .append(this.contentView.render().el);
 
             this.bindValidationToViews();
 
