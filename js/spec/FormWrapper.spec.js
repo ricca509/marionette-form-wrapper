@@ -57,22 +57,40 @@ define(function (require) {
 
         });
 
-        describe('when passed the "noValidate" option', function () {
+        describe('the "noHtml5Validate" option', function () {
             beforeEach(function () {
                 this.view = new this.ItemViewNoIndex({
                     model: new this.Model()
                 });
 
                 this.formWrapper = new FormWrapper({
-                    contentView: this.view,
-                    noValidate: true
+                    contentView: this.view
                 });
 
                 this.formWrapper.render();
             });
 
-            it('should add the "novalidate" attribute to the form', function () {
+            it('should by default add the "novalidate" attribute to the form', function () {
                 expect(this.formWrapper.$el.attr('novalidate')).not.toBeUndefined();
+            });
+
+            describe('when disabled', function () {
+                beforeEach(function () {
+                    this.view = new this.ItemViewNoIndex({
+                        model: new this.Model()
+                    });
+
+                    this.formWrapper = new FormWrapper({
+                        contentView: this.view,
+                        noHtml5Validate: false
+                    });
+
+                    this.formWrapper.render();
+                });
+
+                it('should not add the "novalidate" attribute to the form', function () {
+                    expect(this.formWrapper.$el.attr('novalidate')).toBeUndefined();
+                });
             });
         });
 

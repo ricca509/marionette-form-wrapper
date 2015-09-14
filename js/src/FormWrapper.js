@@ -24,6 +24,10 @@
                 throw 'No contentView provided.';
             }
 
+            _.defaults(this, options, {
+                noHtml5Validate: true
+            });            
+
             this.contentView = options.contentView;
             _.extend(this, _.pick(this.contentView, 'model', 'collection'));
 
@@ -57,7 +61,7 @@
 
         validateSubmit: function (e) {
             e.preventDefault();
-            
+
             _.each(this.getContentViews(), this.validateFullForm, this);
         },
 
@@ -135,9 +139,11 @@
         },
 
         onRender: function () {
-            this.$el
-                .attr('novalidate', '')
-                .append(this.contentView.render().el);
+            if (this.noHtml5Validate) {
+                this.$el.attr('novalidate', 'true');
+            }
+
+            this.$el.append(this.contentView.render().el);
 
             this.bindValidationToViews();
 
