@@ -61,10 +61,10 @@ formWrapper.render();
 ```
 
 ## Options
-These are the options accepted by the library
+These are the options accepted by the constructor:
 
 - ### `contentView` (Object, default: undefined, required: true)
 The instance of the view that you want to validate.
 
 - ### `noHtml5Validate` (Boolean, default: true, required: false)
-Adds the `novalidate` attribut to the `form` element and prevent the validation of the new HTML5 input types.
+Adds the `novalidate` attribute to the `form` element and prevent the validation of the new HTML5 input types.
