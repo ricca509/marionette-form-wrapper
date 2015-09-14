@@ -4,7 +4,7 @@
   "description": "Marionette Form Wrapper",
   "main": "js/src/FormWrapper",
   "scripts": {
-    "test": "grunt jasmine"
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",

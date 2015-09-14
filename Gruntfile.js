@@ -75,8 +75,9 @@ module.exports = function (grunt) {
         }
 
     });
-
+    
     grunt.registerTask('vendor', ['clean:vendor', 'shell:runBower', 'bowercopy']);
+    grunt.registerTask('test', ['vendor', 'jasmine']);
     grunt.registerTask('default', ['vendor', 'jshint', 'jasmine']);
 
 };
