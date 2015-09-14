@@ -26,9 +26,8 @@
 
             _.defaults(this, options, {
                 noHtml5Validate: true
-            });            
-
-            this.contentView = options.contentView;
+            });
+            
             _.extend(this, _.pick(this.contentView, 'model', 'collection'));
 
             if (!this.model && !this.collection) {
